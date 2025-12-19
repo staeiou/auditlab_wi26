@@ -19,8 +19,6 @@ spec:
     env:
       - name: HF_HOME
         value: /workspace/.cache/huggingface
-      - name: TRANSFORMERS_CACHE
-        value: /workspace/.cache/huggingface/transformers
       - name: HF_DATASETS_CACHE
         value: /workspace/.cache/huggingface/datasets
       - name: UV_CACHE_DIR
