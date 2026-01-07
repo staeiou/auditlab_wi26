@@ -1,0 +1,32 @@
+# Prices in USD per 1M tokens.
+# Source: OpenAI pricing page (standard + flex tiers). Update periodically.
+# NOTE: snapshots typically price the same as their base alias.
+
+tiers:
+  standard:
+    gpt-4o:
+      input: 2.50
+      output: 10.00
+    gpt-4o-mini:
+      input: 0.15
+      output: 0.60
+    gpt-5-nano:
+      input: 0.05
+      output: 0.40
+
+  flex:
+    gpt-4o:
+      input: 1.25
+      output: 5.00
+    gpt-4o-mini:
+      input: 0.075
+      output: 0.30
+    gpt-5-nano:
+      input: 0.025
+      output: 0.20
+
+# Map snapshot names -> base alias for pricing lookup
+aliases:
+  gpt-4o-mini-2024-07-18: gpt-4o-mini
+  gpt-5-nano-2025-08-07: gpt-5-nano
+

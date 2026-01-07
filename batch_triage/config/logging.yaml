@@ -1,0 +1,42 @@
+artifacts:
+  input_artifact:
+    name: openai-batch-inputs
+    type: openai-batch-inputs
+    include_globs:
+      - "batch/**/**_requests.jsonl"
+      - "batch/**/**_requests.csv"
+
+  state_artifact:
+    name: openai-batch-state
+    type: openai-batch-state
+    upload_every_seconds: 60
+    include_files:
+      - "state/openai_batch_state.json"
+
+  results_artifact:
+    name_template: "openai-batch-results-{model_dir}"
+    type: openai-batch-results
+    include_files:
+      - "outputs/openai/{model_dir}/output.jsonl"
+      - "outputs/openai/{model_dir}/errors.jsonl"
+      - "outputs/openai/{model_dir}/results_compact.csv"
+
+results_compact:
+  include_input_features:
+    - age
+    - gender
+    - race
+    - occupation
+    - language
+    - safety_plan
+    - trauma
+
+  include_output_fields:
+    - raw_response
+    - urgency_score
+    - triage_level
+    - ok
+    - error
+
+  store_prompt: false
+

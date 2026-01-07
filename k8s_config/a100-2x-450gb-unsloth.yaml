@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: YOURNAME-2gpu-pods
+  name: hmao-2gpu-pods
   namespace: sgeiger-capstone
 spec:
   affinity:
@@ -26,7 +26,10 @@ spec:
       - name: PIP_CACHE_DIR
         value: /workspace/.cache/pip
       - name: HF_TOKEN
-        value: ""
+        valueFrom:
+          secretKeyRef:
+            name: hf-token
+            key: token
       - name: GITHUB_PAT
         value: ""
     command: ["/bin/bash", "-lc"]
