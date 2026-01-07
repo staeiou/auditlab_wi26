@@ -1,6 +1,7 @@
 
 project/
 ├─ config/
+# have static config & user changing config
 │  ├─ config.yaml                 # main config: models, batch endpoint, polling, W&B project, paths
 │  ├─ pricing.yaml                # model pricing (input/output $/1M) used for cost estimation
 │  ├─ limits.yaml                 # OpenAI Batch limits + W&B upload cadence limits
