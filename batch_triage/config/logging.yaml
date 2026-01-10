@@ -33,8 +33,7 @@ results_compact:
 
   include_output_fields:
     - raw_response
-    - urgency_score
-    - triage_level
+    - parsed_json
     - ok
     - error
 

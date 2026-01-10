@@ -3,6 +3,7 @@ openai_batch:
   max_file_size_mb: 200
   allowed_completion_windows: ["24h"]
   require_single_model_per_file: true
+  max_concurrent_control_calls: 4
 
 wandb:
   # Guardrails (conservative). Keep logging lightweight.
