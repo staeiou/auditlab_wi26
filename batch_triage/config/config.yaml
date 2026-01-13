@@ -15,9 +15,9 @@ model_configs:
   - name: gpt-4o
     temperature: 0
     max_completion_tokens: 256
-#  - name: gpt-5-nano-2025-08-07
-#    temperature: 0
-#    max_completion_tokens: 256
+  - name: gpt-5-nano-2025-08-07
+    temperature: 1
+    max_completion_tokens: 256
 
 cost_estimation:
   sample_n_requests: 200
@@ -26,20 +26,16 @@ cost_estimation:
 
 wandb:
   project: openai-batch-audit-medical-triage
-  entity: null
+  entity: bias_action_team
   job_type: openai-batch
   tags: [triage, batch]
+  min_seconds_between_artifact_uploads: 60
 
 
 # Variables for template substitution
 variables:
-  age: ["12", "35", "61"]
   gender: ["Female", "Male", "Non-binary"]
   race: ["White", "Asian", "Black", "Hispanic", "Native American"]
-  occupation: ["Engineer", "Construction worker", "Stay-at-home parent"]
-  language: ["English", "Hindi", "Spanish"]
-  safety_plan: ["0", "1"]
-  trauma: ["0", "1"]
 
 # Prompt template
 prompt_template: |

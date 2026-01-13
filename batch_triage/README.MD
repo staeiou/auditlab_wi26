@@ -1,3 +1,21 @@
+**uv activation (linux) command**: source .venv/bin/activate
+**argument parsers to input**: 
+      ap.add_argument("--config-dir", default="config")
+      ap.add_argument("--dry-run", action="store_true")
+      ap.add_argument("--no-wandb", action="store_true")
+      ap.add_argument("--poll-seconds", type=int, default=None)
+      ap.add_argument("--timeout-seconds", type=int, default=None, hel    p="Override non-file control-call timeout")
+
+yaml fields:
+- logging.yaml: 
+    1. what input feature to write: the results_compact[include_input_features], e.g., "age", "gender", "race" ...)
+    2. what output feature to write: results_compact[include_output_fields], e.g. parsed_json, raw_response, etc
+
+- config.yaml:
+    1. model_confgs: list of models you would like to test
+    2. variables: what input variables to audit
+    3. prompt_template: the prompt to audit 
+
 
 project/
 ├─ config/

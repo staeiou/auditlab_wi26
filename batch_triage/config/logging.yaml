@@ -3,8 +3,8 @@ artifacts:
     name: openai-batch-inputs
     type: openai-batch-inputs
     include_globs:
-      - "batch/**/**_requests.jsonl"
-      - "batch/**/**_requests.csv"
+      - "batch/**/*_requests.jsonl"
+      - "batch/**/*_requests.csv"
 
   state_artifact:
     name: openai-batch-state

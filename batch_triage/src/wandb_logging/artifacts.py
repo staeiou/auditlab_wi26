@@ -5,7 +5,7 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Iterable
 
 import wandb
 
@@ -54,25 +54,56 @@ def _add_files_to_artifact(
             added += 1
     return added
 
+def _normalize_glob_pattern(pat: str) -> str:
+    """
+    pathlib.Path.glob() requires '**' to be a whole path component.
+    Normalize common mistakes like:
+      - 'batch/**_requests.jsonl' -> 'batch/**/*_requests.jsonl'
+      - 'outputs/**.jsonl'        -> 'outputs/**/*.jsonl'
+      - '**.jsonl'                -> '**/*.jsonl'
+    """
+    parts = pat.split("/")
+    new_parts = []
+    for part in parts:
+        if "**" in part and part != "**":
+            # Handle patterns where '**' is embedded in the component.
+            if part.startswith("**"):
+                suffix = part[2:]
+                if suffix:
+                    new_parts.append("**")
+                    # ensure suffix component still has a wildcard
+                    new_parts.append(("*" + suffix) if not suffix.startswith("*") else suffix)
+                else:
+                    new_parts.append("**")
+            elif part.endswith("**"):
+                prefix = part[:-2]
+                if prefix:
+                    new_parts.append(prefix + "*")
+                    new_parts.append("**")
+                else:
+                    new_parts.append("**")
+            else:
+                # rare: '**' in the middle of a component -> degrade to single '*'
+                new_parts.append(part.replace("**", "*"))
+        else:
+            new_parts.append(part)
+    return "/".join(new_parts)
 
-def _add_globs_to_artifact(
-    artifact: wandb.Artifact,
-    *,
-    project_root: Path,
-    include_globs: List[str],
-) -> int:
-    """
-    Add files matching glob patterns relative to project_root.
-    Returns number of files added.
-    """
+def _add_globs_to_artifact(artifact, *, project_root: Path, include_globs: Iterable[str]) -> int:
     added = 0
-    for pat in include_globs:
-        for p in project_root.glob(pat):
-            if p.exists() and p.is_file():
-                artifact.add_file(str(p))
-                added += 1
+    for raw_pat in include_globs:
+        pat = _normalize_glob_pattern(raw_pat)
+        try:
+            for p in project_root.glob(pat):
+                if p.is_file():
+                    artifact.add_file(str(p), name=str(p.relative_to(project_root)))
+                    added += 1
+        except ValueError as e:
+            raise ValueError(
+                f"Invalid glob pattern '{raw_pat}' (normalized to '{pat}'). "
+                f"Note: '**' must be its own path component, e.g. '**/*.jsonl'."
+            ) from e
     return added
-
 
 def _require_key(d: dict, k: str, where: str) -> Any:
     if k not in d:
@@ -128,7 +159,9 @@ class ArtifactUploader:
     # -------------------------
     # Upload gating
     # -------------------------
-    def _ok_to_upload_artifact(self) -> bool:
+    def _ok_to_upload_artifact(self, force: bool = False) -> bool:
+        if force:
+            return True
         return (_now() - self.last_artifact_upload_unix) >= self._min_artifact_interval()
 
     def _mark_artifact_uploaded(self) -> None:
@@ -146,12 +179,12 @@ class ArtifactUploader:
     # -------------------------
     # Public API
     # -------------------------
-    def upload_inputs_once(self) -> Optional[str]:
+    def upload_inputs_once(self, force: bool = False) -> Optional[str]:
         """
         Upload the input artifact as defined in logging.yaml: artifacts.input_artifact
         Returns artifact name if uploaded, else None.
         """
-        if not self._ok_to_upload_artifact():
+        if not self._ok_to_upload_artifact(force=force):
             return None
 
         specs = self._artifact_specs()
@@ -183,7 +216,7 @@ class ArtifactUploader:
         self._mark_artifact_uploaded()
         return name
 
-    def upload_state_if_due(self) -> Optional[str]:
+    def upload_state_if_due(self, force: bool = False) -> Optional[str]:
         """
         Upload the state artifact periodically.
         Uses logging.yaml: artifacts.state_artifact.upload_every_seconds (default 60).
@@ -193,9 +226,9 @@ class ArtifactUploader:
         spec = _require_key(specs, "state_artifact", "logging.yaml:artifacts")
 
         every = int(spec.get("upload_every_seconds", 60))
-        if (_now() - self.last_state_upload_unix) < every:
+        if not force and (_now() - self.last_state_upload_unix) < every:
             return None
-        if not self._ok_to_upload_artifact():
+        if not self._ok_to_upload_artifact(force=force):
             return None
 
         name = str(_require_key(spec, "name", "logging.yaml:artifacts.state_artifact"))
@@ -217,13 +250,13 @@ class ArtifactUploader:
         self.last_state_upload_unix = _now()
         return name
 
-    def upload_results_for_model_if_present(self, model: str) -> Optional[str]:
+    def upload_results_for_model_if_present(self, model: str, force: bool = False) -> Optional[str]:
         """
         Upload per-model results artifact if the configured output files exist.
         Uses logging.yaml: artifacts.results_artifact (name_template, include_files).
         Returns artifact name if uploaded, else None.
         """
-        if not self._ok_to_upload_artifact():
+        if not self._ok_to_upload_artifact(force=force):
             return None
 
         specs = self._artifact_specs()

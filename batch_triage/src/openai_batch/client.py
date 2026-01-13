@@ -17,19 +17,26 @@ class OpenAIBatchClient:
     """
     Thin wrapper around the OpenAI Python SDK for Batch-related operations.
 
-    Methods:
-      - upload_file_for_batch(jsonl_path) -> UploadedFile
-      - create_batch(input_file_id, endpoint, completion_window, metadata) -> batch object
-      - get_batch(batch_id) -> batch object
-      - download_file(file_id, out_path) -> Path
+    Notes on timeouts:
+      - Official OpenAI SDKs have a default request timeout (docs mention 10 minutes),
+        and allow overriding via `timeout` plus per-request overrides via `with_options(timeout=...)`. :contentReference[oaicite:1]{index=1}
+      - For large output downloads, we use a longer timeout and write atomically to avoid partial files.
 
-    Notes:
-      - Assumes OPENAI_API_KEY is set in env unless you pass a configured OpenAI client.
-      - Works with OpenAI-compatible endpoints too, if you construct OpenAI(base_url=..., api_key=...).
+    If you pass a pre-configured OpenAI client, this class will not override its timeouts/retries.
     """
 
-    def __init__(self, client: Optional[OpenAI] = None):
-        self.client = client or OpenAI()
+    def __init__(
+        self,
+        client: Optional[OpenAI] = None,
+        *,
+        timeout_s: float = 600.0,          # 10 minutes (matches docs default mention) :contentReference[oaicite:2]{index=2}
+        download_timeout_s: float = 1200.0, # 20 minutes for large file downloads
+        max_retries: int = 2,              # OpenAI SDK retries some transient failures by default :contentReference[oaicite:3]{index=3}
+    ):
+        self.client = client or OpenAI(timeout=timeout_s, max_retries=max_retries)
+        self._timeout_s = timeout_s
+        self._download_timeout_s = download_timeout_s
+        self._max_retries = max_retries
 
     def upload_file_for_batch(self, jsonl_path: Path) -> UploadedFile:
         if not jsonl_path.exists():
@@ -46,7 +53,6 @@ class OpenAIBatchClient:
         completion_window: str,
         metadata: Optional[Dict[str, str]] = None,
     ) -> Any:
-        # returns OpenAI SDK batch object
         return self.client.batches.create(
             input_file_id=input_file_id,
             endpoint=endpoint,
@@ -60,22 +66,52 @@ class OpenAIBatchClient:
     def download_file(self, file_id: str, out_path: Path) -> Path:
         """
         Download a file from OpenAI Files API to out_path.
-        Compatible with openai-python's content streaming interface.
+
+        Safety properties:
+          - Uses a longer timeout for downloads (per-request override).
+          - Writes to a temporary .part file then atomically replaces out_path,
+            so downstream parsers never see a partially-written JSONL.
         """
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        content = self.client.files.content(file_id)
+        tmp_path = out_path.with_suffix(out_path.suffix + ".part")
 
-        # openai-python often provides write_to_file
-        if hasattr(content, "write_to_file"):
-            content.write_to_file(str(out_path))
+        # Ensure stale partial file doesn't confuse us
+        if tmp_path.exists():
+            try:
+                tmp_path.unlink()
+            except Exception:
+                pass
+
+        # Use a per-request timeout override for large downloads. :contentReference[oaicite:4]{index=4}
+        dl_client = self.client
+        if hasattr(self.client, "with_options"):
+            dl_client = self.client.with_options(timeout=self._download_timeout_s)
+
+        try:
+            content = dl_client.files.content(file_id)
+
+            # openai-python often provides write_to_file
+            if hasattr(content, "write_to_file"):
+                content.write_to_file(str(tmp_path))
+            elif hasattr(content, "read"):
+                tmp_path.write_bytes(content.read())
+            else:
+                tmp_path.write_bytes(bytes(content))
+
+            # Basic sanity check: file exists after write
+            if not tmp_path.exists() or tmp_path.stat().st_size == 0:
+                raise RuntimeError(f"Downloaded file is empty or missing: {tmp_path}")
+
+            # Atomic replace
+            tmp_path.replace(out_path)
             return out_path
 
-        # fallback: file-like .read()
-        if hasattr(content, "read"):
-            out_path.write_bytes(content.read())
-            return out_path
-
-        # fallback: bytes-like
-        out_path.write_bytes(bytes(content))
-        return out_path
+        except Exception:
+            # Clean up partial download so next retry starts cleanly
+            try:
+                if tmp_path.exists():
+                    tmp_path.unlink()
+            except Exception:
+                pass
+            raise
 
