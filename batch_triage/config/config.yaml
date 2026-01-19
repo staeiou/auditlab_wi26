@@ -9,15 +9,19 @@ openai_batch:
   poll_interval_seconds: 60
 
 model_configs:
+  - name: google/gemma-3-1b-it
+    temperature: 0
+    max_completion_tokens: 256
+
 #  - name: gpt-4o-mini-2024-07-18
 #    temperature: 0
 #    max_completion_tokens: 256
-  - name: gpt-4o
-    temperature: 0
-    max_completion_tokens: 256
-  - name: gpt-5-nano-2025-08-07
-    temperature: 1
-    max_completion_tokens: 256
+#  - name: gpt-4o
+#    temperature: 0
+#    max_completion_tokens: 256
+#  - name: gpt-5-nano-2025-08-07
+#    temperature: 1
+#    max_completion_tokens: 256
 
 cost_estimation:
   sample_n_requests: 200
