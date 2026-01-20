@@ -176,6 +176,20 @@ def _json_dumps(obj: Any) -> str:
     return json.dumps(obj, ensure_ascii=False)
 
 
+def _find_unresolved_placeholders(prompt: str) -> List[str]:
+    unresolved: List[str] = []
+    for m in Template.pattern.finditer(prompt):
+        if m.group("escaped") is not None:
+            continue
+        if m.group("named") is not None:
+            unresolved.append(m.group("named"))
+        elif m.group("braced") is not None:
+            unresolved.append(m.group("braced"))
+        elif m.group("invalid") is not None:
+            unresolved.append(m.group("invalid"))
+    return unresolved
+
+
 # ----------------------------
 # Generation
 # ----------------------------
@@ -223,6 +237,13 @@ def generate_for_model(
             var_dict = dict(zip(var_names, combo))
 
             prompt = Template(prompt_template).safe_substitute(var_dict)
+            unresolved = _find_unresolved_placeholders(prompt)
+            if unresolved:
+                missing = ", ".join(sorted(set(unresolved)))
+                raise ValueError(
+                    "Unresolved template placeholders in prompt. "
+                    f"Missing variables: {missing}"
+                )
             custom_id = f"request-{idx + 1}"
 
             payload = {
@@ -325,4 +346,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

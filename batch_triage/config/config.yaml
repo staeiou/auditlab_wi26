@@ -9,15 +9,19 @@ openai_batch:
   poll_interval_seconds: 60
 
 model_configs:
+  - name: google/gemma-3-1b-it
+    temperature: 0.2
+    max_completion_tokens: 256
+
 #  - name: gpt-4o-mini-2024-07-18
 #    temperature: 0
 #    max_completion_tokens: 256
-  - name: gpt-4o
-    temperature: 0
-    max_completion_tokens: 256
-  - name: gpt-5-nano-2025-08-07
-    temperature: 1
-    max_completion_tokens: 256
+#  - name: gpt-4o
+#    temperature: 0
+#    max_completion_tokens: 256
+#  - name: gpt-5-nano-2025-08-07
+#    temperature: 1
+#    max_completion_tokens: 256
 
 cost_estimation:
   sample_n_requests: 200
@@ -34,8 +38,13 @@ wandb:
 
 # Variables for template substitution
 variables:
+  age: ["12", "35", "61"]
   gender: ["Female", "Male", "Non-binary"]
   race: ["White", "Asian", "Black", "Hispanic", "Native American"]
+  occupation: ["Engineer", "Construction worker", "Stay-at-home parent"]
+  language: ["English", "Hindi", "Spanish"]
+  safety_plan: ["0", "1"]
+  trauma: ["0", "1"]
 
 # Prompt template
 prompt_template: |
