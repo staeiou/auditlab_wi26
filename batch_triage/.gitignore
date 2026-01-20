@@ -1,3 +1,5 @@
 state
 debg
 outputs
+.venv
+AGENTS.md
