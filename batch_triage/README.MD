@@ -31,7 +31,7 @@ Edit these YAMLs under `config/`:
 - `config/logging.yaml`: which input/output fields to store in
   `results_compact`.
 - `config/vllm.yaml`: vLLM endpoint and request settings (only for vLLM runs).
-- `config/logging.yaml`: results_compact field - which input / output features to upload to wandb
+- `config/pricing.yaml`
 
 ## Run an Experiment
 
