@@ -1,0 +1,52 @@
+# config/anthropic.yaml
+anthropic:
+  base_url: "https://api.anthropic.com"
+  api_key_env: "ANTHROPIC_API_KEY"
+  anthropic_version: "2023-06-01"
+
+  # Optional: if you need specific beta features, add them here (usually leave empty).
+  # Your runner can send these as the "anthropic-beta" header (comma-separated).
+  betas: []  # e.g. ["message-batches-2024-09-24"]
+
+  endpoints:
+    create_batch: "/v1/messages/batches"
+    retrieve_batch: "/v1/messages/batches/{batch_id}"
+    list_batches: "/v1/messages/batches"
+    cancel_batch: "/v1/messages/batches/{batch_id}/cancel"
+    delete_batch: "/v1/messages/batches/{batch_id}"
+    results: "/v1/messages/batches/{batch_id}/results"
+
+  # Submit is 1 POST with an inline `requests: [...]` array.
+  # Collect polls retrieve_batch until ended, then downloads results (jsonl) from `results_url`
+  polling:
+    interval_seconds: 30
+    max_wait_hours: 24
+
+  request_timeout_seconds: 120
+  retry:
+    max_attempts: 3
+    backoff_seconds: 2
+
+  # Guardrails (match current Anthropic batch limits; enforced client-side in our runner)
+  batch_limits:
+    max_requests_per_batch: 100000
+    max_batch_size_mb: 256
+    max_custom_id_length: 64
+    expires_after_hours: 24
+    results_retention_days: 29
+
+  # How we adapt our OpenAI-style JSONL intermediate into Anthropic batch requests
+  adapter:
+    input_jsonl_format: "openai_batch_jsonl"   # lines like {custom_id, method, url, body:{model,messages,...}}
+    system_role_strategy: "collect_to_system"  # move any role=system messages into Anthropic `system` field
+    max_tokens_field: "max_tokens"             # map max_completion_tokens -> max_tokens
+    drop_unsupported_fields: true              # ignore fields Anthropic doesn't accept rather than failing
+
+  # Output filenames inside outputs/anthropic/<model_dir>/
+  outputs:
+    batch_meta_json: "batch_meta.json"         # stores batch_id + input hash, etc.
+    raw_results_jsonl: "raw_results.jsonl"     # downloaded from /results
+    normalized_output_jsonl: "output.jsonl"    # your standard schema (custom_id/response/error)
+    errors_jsonl: "errors.jsonl"               # rewritten from output.jsonl
+    errors_history_jsonl: "errors_history.jsonl"
+
