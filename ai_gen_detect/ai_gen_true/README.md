@@ -9,7 +9,6 @@ The short answer response is identical for every call, and the only difference i
 - `requirements.txt` - Necessary python package dependencies
 - `experiment.py` - Python script to reproduce the experiment data
 - `analysis.ipynb` - Original Experiment Data Analysis
-- `trial_config.json` - Complete trial configuration, for importing back to web/desktop Auditomatic app
 - Output files (generated from `experiment.py`):
     - `results_YYYYMMDD_HHMMSS.db` - Sqlite3 database with full prompt/response logs
     - `results_YYYYMMDD_HHMMSS.csv` - Default output.
