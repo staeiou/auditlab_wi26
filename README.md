@@ -22,4 +22,9 @@ batch_triage/
 └─ requirements.txt         # dependencies
 docker/
 legal/legal_service_audit/
+├─ analysis.ipynb                      # Jupyter Notebook with analysis, visualizations & statistical testing
+├─ legal_services_audit_handoff.csv    # Dataset obtained from legal services audit
+mental_health/
+├─ analysis.ipynb           # Jupyter Notebook with analysis, visualizations & statistical testing
+├─ medical_data.csv         # Dataset obtained from mental health audit
 ```
