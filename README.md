@@ -2,15 +2,15 @@
 ```
 ai_gen_detect/
 ├─ ai_gen_false/
- ├─ README.md               # Experiment Description & Replication Instructions
- ├─ analysis.ipynb          # Jupyter Notebook with analysis, visualizations & statistical testing
- ├─ experiment.py           # Python Script to generate dataset, exports .csv by default
- ├─ requirements.txt        # dependencies
+|├─ README.md               # Experiment Description & Replication Instructions
+|├─ analysis.ipynb          # Jupyter Notebook with analysis, visualizations & statistical testing
+|├─ experiment.py           # Python Script to generate dataset, exports .csv by default
+|├─ requirements.txt        # dependencies
 ├─ ai_gen_true/
- ├─ README.md               # Experiment Description & Replication Instructions
- ├─ analysis.ipynb          # Jupyter Notebook with analysis, visualizations & statistical testing
- ├─ experiment.py           # Python Script to generate dataset, exports .csv by default
- ├─ requirements.txt        # dependencies
+|├─ README.md               # Experiment Description & Replication Instructions
+|├─ analysis.ipynb          # Jupyter Notebook with analysis, visualizations & statistical testing
+|├─ experiment.py           # Python Script to generate dataset, exports .csv by default
+|├─ requirements.txt        # dependencies
 audito-jsonl/
 batch_triage/
 ├─ config/                  # YAML configuration you edit
