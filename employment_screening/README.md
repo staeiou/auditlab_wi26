@@ -4,9 +4,9 @@ Introduction section of analysis.ipynb.
 
 ### Structure
 ```
-mental_health/
+employment_screening/
 ├─ analysis.ipynb           # Jupyter Notebook with analysis, visualizations & statistical testing
-├─ results.csv              # Dataset obtained from mental health audit
+├─ results.csv              # Dataset obtained from employment screening audit
 ├─ requirements.txt         # dependencies 
 ```
 
