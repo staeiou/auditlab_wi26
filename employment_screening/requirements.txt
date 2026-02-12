@@ -1,9 +1,0 @@
-# Production Template Requirements
-# Install with: pip install -r requirements.txt
-
-# Core dependencies (required)
-matplotlib>=3.8
-numpy>=1.26
-pandas>=2.2
-scipy>=1.11
-seaborn>=0.13

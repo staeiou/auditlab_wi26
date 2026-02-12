@@ -1,6 +1,6 @@
 ## Folder Structure 
 ```
-ai_gen_detect/
+audit_1_ai_gen_detect/
 ├─ ai_gen_false/
 |├─ README.md                        # Experiment Description & Replication Instructions
 |├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
@@ -11,7 +11,7 @@ ai_gen_detect/
 |├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
 |├─ experiment.py                    # Python Script to generate dataset, exports .csv by default
 |├─ requirements.txt                 # dependencies
-batch_triage/
+data_extraction/
 ├─ config/                           # YAML configuration you edit
 ├─ scripts/                          # CLI entrypoints (generate + run)
 ├─ src/                              # core Python modules (batch client, logging, parsing)
@@ -19,15 +19,15 @@ batch_triage/
 ├─ outputs/                          # batch outputs and compact CSVs
 ├─ state/                            # runtime state (resume/polling)
 └─ requirements.txt                  # dependencies
-legal/legal_service_audit/
-├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
-├─ legal_services_audit_handoff.csv  # Dataset obtained from legal services audit
-mental_health/
-├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
-├─ medical_data.csv                  # Dataset obtained from mental health audit
-├─ requirements.txt                  # dependencies 
-employment_screening/
+audit_2_employment_screening/
 ├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
 ├─ results.csv                       # Dataset obtained from employment screening audit
+├─ requirements.txt                  # dependencies 
+audit_3_legal/legal_service_audit/
+├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
+├─ legal_services_audit_handoff.csv  # Dataset obtained from legal services audit
+audit_4_mental_health/
+├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
+├─ medical_data.csv                  # Dataset obtained from mental health audit
 ├─ requirements.txt                  # dependencies 
 ```
