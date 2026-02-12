@@ -11,7 +11,6 @@ ai_gen_detect/
 |├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
 |├─ experiment.py                    # Python Script to generate dataset, exports .csv by default
 |├─ requirements.txt                 # dependencies
-audito-jsonl/
 batch_triage/
 ├─ config/                           # YAML configuration you edit
 ├─ scripts/                          # CLI entrypoints (generate + run)
@@ -20,7 +19,6 @@ batch_triage/
 ├─ outputs/                          # batch outputs and compact CSVs
 ├─ state/                            # runtime state (resume/polling)
 └─ requirements.txt                  # dependencies
-docker/
 legal/legal_service_audit/
 ├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
 ├─ legal_services_audit_handoff.csv  # Dataset obtained from legal services audit
