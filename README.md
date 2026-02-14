@@ -4,11 +4,13 @@ audit_1_ai_gen_detect/
 ├─ ai_gen_false/
 |├─ README.md                        # Experiment Description & Replication Instructions
 |├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
+|├─ detec_false_analysis.html        # HTML analysis export for ease of reading via web browser
 |├─ experiment.py                    # Python Script to generate dataset, exports .csv by default
 |└─ requirements.txt                 # dependencies
 ├─ ai_gen_true/
 |├─ README.md                        # Experiment Description & Replication Instructions
 |├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
+|├─ detec_true_analysis.html         # HTML analysis export for ease of reading via web browser
 |├─ experiment.py                    # Python Script to generate dataset, exports .csv by default
 |└─ requirements.txt                 # dependencies
 data_extraction/
