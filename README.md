@@ -1,51 +1,76 @@
-## Folder Structure 
-```
-audit_1_ai_gen_detect/
-├─ ai_gen_false/
-|├─ README.md                        # Experiment Description & Replication Instructions
-|├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
-|├─ detec_false_analysis.html        # HTML analysis export for ease of reading via web browser
-|├─ experiment.py                    # Python Script to generate dataset, exports .csv by default
-|└─ requirements.txt                 # dependencies
-├─ ai_gen_true/
-|├─ README.md                        # Experiment Description & Replication Instructions
-|├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
-|├─ detec_true_analysis.html         # HTML analysis export for ease of reading via web browser
-|├─ experiment.py                    # Python Script to generate dataset, exports .csv by default
-|└─ requirements.txt                 # dependencies
-data_extraction/
-├─ config/                           # YAML configuration you edit
-├─ scripts/                          # CLI entrypoints (generate + run)
-├─ src/                              # core Python modules (batch client, logging, parsing)
-├─ batch/                            # generated JSONL/CSV inputs per model
-├─ outputs/                          # batch outputs and compact CSVs
-├─ state/                            # runtime state (resume/polling)
-└─ requirements.txt                  # dependencies
-audit_2_employment_screening/
-├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
-├─ results.csv                       # Dataset obtained from employment screening audit
-└─ requirements.txt                  # dependencies 
-audit_3_legal/legal_service_audit/
-├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
-└─legal_services_audit_handoff.csv   # Dataset obtained from legal services audit
-audit_4_mental_health/
-├─ analysis.ipynb                    # Jupyter Notebook with analysis, visualizations & statistical testing
-├─ medical_data.csv                  # Dataset obtained from mental health audit
-└─ requirements.txt                  # dependencies 
-audit_5_service_eval/
-├─ layoffs/
-|├─ README.md                        # Experiment Description & Replication Instructions
-|├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
-|├─ eval_neg_analysis.html           # HTML analysis export for ease of reading via web browser
-|├─ experiment.py                    # Python Script to generate dataset, exports .csv by default
-|├─ statistical_utils.py             # Statistical functions & other utilities module
-|└─ requirements.txt                 # dependencies
-├─ reward/
-|├─ README.md                        # Experiment Description & Replication Instructions
-|├─ analysis.ipynb                   # Jupyter Notebook with analysis, visualizations & statistical testing
-|├─ eval_pos_analysis.html           # HTML analysis export for ease of reading via web browser
-|├─ experiment.py                    # Python Script to generate dataset, exports .csv by default
-|├─ statistical_utils.py             # Statistical functions & other utilities module
-|└─ requirements.txt                 # dependencies
+# LLM Fairness Audits
 
+This repository contains a set of domain-specific LLM fairness audits plus a
+shared extraction/runtime pipeline in `data_extraction/`. The audit folders
+focus on controlled perturbation experiments: task-relevant evidence is held
+constant while demographic/context variables are varied to test consistency and
+potential bias in model outputs. Domains may also use additional extraction
+pipelines as needed; they are not required to use only `data_extraction/`.
+
+## Repository Structure (Non-Ignored)
+
+```text
+.
+├─ audit_1_ai_gen_detect/
+│  ├─ ai_gen_false/
+│  │  ├─ README.md
+│  │  ├─ experiment.py
+│  │  ├─ analysis.ipynb
+│  │  └─ detec_false_analysis.html
+│  └─ ai_gen_true/
+│     ├─ README.md
+│     ├─ experiment.py
+│     ├─ analysis.ipynb
+│     └─ detec_true_analysis.html
+├─ audit_2_employment_screening/
+│  ├─ README.md
+│  ├─ results.csv
+│  └─ analysis.ipynb
+├─ audit_3_legal/
+│  └─ legal_service_audit/
+│     ├─ legal_services_audit_handoff.csv
+│     └─ analysis.ipynb
+├─ audit_4_mental_health/
+│  ├─ README.md
+│  ├─ medical_data.csv
+│  └─ analysis.ipynb
+├─ audit_5_service_eval/
+│  ├─ layoffs/
+│  │  ├─ README.md
+│  │  ├─ experiment.py
+│  │  ├─ statistical_utils.py
+│  │  ├─ analysis.ipynb
+│  │  └─ eval_neg_analysis.html
+│  └─ reward/
+│     ├─ README.md
+│     ├─ experiment.py
+│     ├─ statistical_utils.py
+│     ├─ analysis.ipynb
+│     └─ eval_pos_analysis.html
+└─ data_extraction/
+   ├─ README.MD
+   ├─ requirements.txt
+   ├─ config/                          # model/pricing/logging/limits/vLLM YAMLs
+   ├─ scripts/                         # payload generation and batch run scripts
+   ├─ src/                             # config, cost, OpenAI batch, state, W&B modules
+   └─ batch/                           # generated request payloads used by some runs
 ```
+
+## What Each Audit Covers
+
+- `audit_1_ai_gen_detect/`: AI-generated text detection scoring audit with two
+  conditions (`ai_gen_false` and `ai_gen_true`) using controlled name/level
+  perturbations.
+- `audit_2_employment_screening/`: Employment recommendation fairness audit
+  where demographic attributes are perturbed while applicant qualifications stay
+  fixed.
+- `audit_3_legal/legal_service_audit/`: Legal-services triage audit on housing
+  scenarios, measuring recommendation and risk outputs across perturbed inputs.
+- `audit_4_mental_health/`: Mental-health triage audit measuring urgency score
+  and triage level under controlled demographic/context perturbations.
+- `audit_5_service_eval/`: Teacher service evaluation audit with two policy
+  framings: `layoffs` (negative framing) and `reward` (positive framing).
+- `data_extraction/`: Shared extraction/runtime utilities for batch payload
+  creation and model execution; optional for domains that need custom pipelines.
+
+For replication details, start with the README inside each experiment folder.
