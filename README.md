@@ -27,7 +27,6 @@ Domains can also use additional extraction workflows when needed.
    ├─ batch/
    ├─ config/
    ├─ scripts/
-   │  └─ pending_scripts_not_validated/
    └─ src/
       ├─ openai_batch/
       └─ wandb_logging/
