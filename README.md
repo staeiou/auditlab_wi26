@@ -1,76 +1,53 @@
 # LLM Fairness Audits
 
-This repository contains a set of domain-specific LLM fairness audits plus a
-shared extraction/runtime pipeline in `data_extraction/`. The audit folders
-focus on controlled perturbation experiments: task-relevant evidence is held
-constant while demographic/context variables are varied to test consistency and
-potential bias in model outputs. Domains may also use additional extraction
-pipelines as needed; they are not required to use only `data_extraction/`.
+This repository contains domain-specific LLM fairness audits and supporting
+extraction workflows. The audits use controlled perturbation designs where
+task-relevant evidence is held constant and demographic or context variables are
+varied to evaluate consistency in model behavior.
 
-## Repository Structure (Non-Ignored)
+`data_extraction/` provides a shared extraction and batch-running pipeline.
+Domains can also use additional extraction workflows when needed.
+
+## Repository Structure
 
 ```text
 .
 ├─ audit_1_ai_gen_detect/
 │  ├─ ai_gen_false/
-│  │  ├─ README.md
-│  │  ├─ experiment.py
-│  │  ├─ analysis.ipynb
-│  │  └─ detec_false_analysis.html
 │  └─ ai_gen_true/
-│     ├─ README.md
-│     ├─ experiment.py
-│     ├─ analysis.ipynb
-│     └─ detec_true_analysis.html
 ├─ audit_2_employment_screening/
-│  ├─ README.md
-│  ├─ results.csv
-│  └─ analysis.ipynb
 ├─ audit_3_legal/
+│  ├─ judge_audit/
 │  └─ legal_service_audit/
-│     ├─ legal_services_audit_handoff.csv
-│     └─ analysis.ipynb
 ├─ audit_4_mental_health/
-│  ├─ README.md
-│  ├─ medical_data.csv
-│  └─ analysis.ipynb
 ├─ audit_5_service_eval/
 │  ├─ layoffs/
-│  │  ├─ README.md
-│  │  ├─ experiment.py
-│  │  ├─ statistical_utils.py
-│  │  ├─ analysis.ipynb
-│  │  └─ eval_neg_analysis.html
 │  └─ reward/
-│     ├─ README.md
-│     ├─ experiment.py
-│     ├─ statistical_utils.py
-│     ├─ analysis.ipynb
-│     └─ eval_pos_analysis.html
 └─ data_extraction/
-   ├─ README.MD
-   ├─ requirements.txt
-   ├─ config/                          # model/pricing/logging/limits/vLLM YAMLs
-   ├─ scripts/                         # payload generation and batch run scripts
-   ├─ src/                             # config, cost, OpenAI batch, state, W&B modules
-   └─ batch/                           # generated request payloads used by some runs
+   ├─ batch/
+   ├─ config/
+   ├─ scripts/
+   │  └─ pending_scripts_not_validated/
+   └─ src/
+      ├─ openai_batch/
+      └─ wandb_logging/
 ```
 
-## What Each Audit Covers
+## Folder Overview
 
-- `audit_1_ai_gen_detect/`: AI-generated text detection scoring audit with two
-  conditions (`ai_gen_false` and `ai_gen_true`) using controlled name/level
-  perturbations.
-- `audit_2_employment_screening/`: Employment recommendation fairness audit
-  where demographic attributes are perturbed while applicant qualifications stay
-  fixed.
-- `audit_3_legal/legal_service_audit/`: Legal-services triage audit on housing
-  scenarios, measuring recommendation and risk outputs across perturbed inputs.
-- `audit_4_mental_health/`: Mental-health triage audit measuring urgency score
-  and triage level under controlled demographic/context perturbations.
-- `audit_5_service_eval/`: Teacher service evaluation audit with two policy
-  framings: `layoffs` (negative framing) and `reward` (positive framing).
-- `data_extraction/`: Shared extraction/runtime utilities for batch payload
-  creation and model execution; optional for domains that need custom pipelines.
+- `audit_1_ai_gen_detect/`: AI-generated text detection likelihood audit with
+  paired false and true writing conditions.
+- `audit_2_employment_screening/`: Hiring-screening fairness audit under
+  demographic perturbations.
+- `audit_3_legal/judge_audit/`: Judge-evaluation fairness audit with controlled
+  demographic/context variables.
+- `audit_3_legal/legal_service_audit/`: Legal-service triage fairness audit for
+  housing-related scenarios.
+- `audit_4_mental_health/`: Mental-health triage fairness audit on urgency and
+  triage-level outputs.
+- `audit_5_service_eval/`: Teacher service evaluation audit with two framings:
+  `layoffs` and `reward`.
+- `data_extraction/`: Shared tooling for payload generation and model batch
+  execution.
 
-For replication details, start with the README inside each experiment folder.
+Each experiment folder includes its own README with run and analysis details.
