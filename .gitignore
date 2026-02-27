@@ -4,5 +4,5 @@ batch_triage/batch
 AGENTS.md
 misc
 
-# Experiment Data
+# Ignore Experiment Data in every directory
 **/data/*
