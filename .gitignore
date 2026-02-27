@@ -6,3 +6,6 @@ misc
 
 # Ignore Experiment Data in every directory
 **/data/*
+
+# Ignore python cache files
+**/__pycache__/
