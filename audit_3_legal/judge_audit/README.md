@@ -11,7 +11,7 @@ judge_audit/
 ├─ analysis.ipynb           # Jupyter Notebook with analysis, visualizations & statistical testing
 ├─ model_data/
    ├─ 11 model perturbation files/
-       ├─ data (generated from experiemnt.py)
+       ├─ data/ (generated from experiemnt.py)
            ├─ results.excel
            ├─ results.jsonl
            ├─ results.csv
