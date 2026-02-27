@@ -9,8 +9,8 @@ This repository contains the full workflow for Experiemnt III, a controlled pert
 ```
 judge_audit/
 ├─ analysis.ipynb           # Jupyter Notebook with analysis, visualizations & statistical testing
-├─ data
-   ├─ 11 model perturbation files
+├─ data/
+   ├─ 11 model perturbation files/
        ├─ data (generated from experiemnt.py)
            ├─ results.excel
            ├─ results.jsonl
