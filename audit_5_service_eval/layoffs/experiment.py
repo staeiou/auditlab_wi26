@@ -298,7 +298,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -306,7 +306,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -343,7 +343,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -351,7 +351,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -388,7 +388,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -396,7 +396,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -433,7 +433,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -441,7 +441,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -478,7 +478,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -486,7 +486,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -523,7 +523,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -531,7 +531,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -568,7 +568,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -576,7 +576,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -595,51 +595,6 @@ MODELS = [
     },
     {
         "config_index": 7,
-        "name": "openai/gpt-oss-120b",
-        "display_name": "openai/gpt-oss-120b",
-        "provider": "openrouter",
-        "url": "https://openrouter.ai/api/v1/chat/completions",
-        "headers": {
-            "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.org",
-            "X-Title": "Auditomatic Lite",
-            "Authorization": "Bearer {{API_KEY}}"
-        },
-        "body": {
-            "model": "openai/gpt-oss-120b",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "{{PROMPT}}"
-                }
-            ],
-            "temperature": 0,
-            "max_tokens": 2048,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "parameters": {
-            "temperature": 0,
-            "max_tokens": 2048,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "extract_paths": [
-            "choices[0].message.content",
-            "choices[0].text",
-            "message.content"
-        ],
-        "reasoning_paths": [
-            "choices[0].message.reasoning",
-            "choices[0].message.reasoning_details[0].summary"
-        ]
-    },
-    {
-        "config_index": 8,
         "name": "openai/gpt-5-nano",
         "display_name": "openai/gpt-5-nano",
         "provider": "openrouter",
@@ -682,6 +637,51 @@ MODELS = [
         ]
     },
     {
+        "config_index": 8,
+        "name": "openai/gpt-oss-120b",
+        "display_name": "openai/gpt-oss-120b",
+        "provider": "openrouter",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "headers": {
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://auditomatic.org",
+            "X-Title": "Auditomatic Lite",
+            "Authorization": "Bearer {{API_KEY}}"
+        },
+        "body": {
+            "model": "openai/gpt-oss-120b",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "{{PROMPT}}"
+                }
+            ],
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "parameters": {
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "extract_paths": [
+            "choices[0].message.content",
+            "choices[0].text",
+            "message.content"
+        ],
+        "reasoning_paths": [
+            "choices[0].message.reasoning",
+            "choices[0].message.reasoning_details[0].summary"
+        ]
+    },
+    {
         "config_index": 9,
         "name": "qwen/qwen-max",
         "display_name": "qwen/qwen-max",
@@ -701,7 +701,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -709,7 +709,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -746,7 +746,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -754,7 +754,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,

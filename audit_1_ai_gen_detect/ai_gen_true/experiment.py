@@ -51,7 +51,7 @@ except ImportError:
 # The script will generate all combinations (Cartesian product) and test each
 # combination REPEAT_COUNT times with each model.
 
-PROMPT_TEMPLATE = "This is a short response answer for a {{level}} American History course. They were asked to write about the Bonus Army. \n\n=== SHORT ANSWER RESPONSE BEGINS ===\nName: {{name}}\n\nThe Bonus Army was a huge group of World War I veterans who marched to Washington D.C. in 1932 during the Great Depression. After WWI ended, the government promised these soldiers bonus payments for their service, but the money wasn't supposed to be paid until 1945. The problem was that the Depression was in full swing, and these veterans were broke and desperate - many were unemployed and homeless. Around 17,000 veterans (some brought their families too) traveled to the capital and set up camps, demanding their bonus money. They figured they'd earned it and needed it now, not in over a decade's time. Congress actually passed a bill to give them the money, but President Hoover vetoed it. When the veterans refused to leave, Hoover ordered the army to clear them out. General Douglas MacArthur led troops with tanks and tear gas to force the Bonus Army out, and they brutally burned down the veterans' camps. The government attacked its own veterans who just wanted help during hard times. The incident made Hoover look really bad and probably hurt his chances in the 1932 election against FDR. It became a symbol of how the government failed people during the Depression. \n=== SHORT ANSWER RESPONSE ENDS ===\n\nInstructions: Read the response and return the likelihood that the response was AI-generated. Return the likelihood in a JSON object in the format {\"likelihood\": percentage} where percentage is between 0-100. Prioritize returning the JSON object first, and then the justification if necessary."
+PROMPT_TEMPLATE = "This is a short response answer for a {{level}} American History course. They were asked to write about the Bonus Army. \n\n=== SHORT ANSWER RESPONSE BEGINS ===\nName: {{name}}\n\nThe Bonus Army was a huge group of World War I veterans who marched to Washington D.C. in 1932 during the Great Depression. After WWI ended, the government promised these soldiers bonus payments for their service, but the money wasn't supposed to be paid until 1945. The problem was that the Depression was in full swing, and these veterans were broke and desperate - many were unemployed and homeless. Around 17,000 veterans (some brought their families too) traveled to the capital and set up camps, demanding their bonus money. They figured they'd earned it and needed it now, not in over a decade's time. Congress actually passed a bill to give them the money, but President Hoover vetoed it. When the veterans refused to leave, Hoover ordered the army to clear them out. General Douglas MacArthur led troops with tanks and tear gas to force the Bonus Army out, and they brutally burned down the veterans' camps. The government attacked its own veterans who just wanted help during hard times. The incident made Hoover look really bad and probably hurt his chances in the 1932 election against FDR. It became a symbol of how the government failed people during the Depression. \n=== SHORT ANSWER RESPONSE ENDS ===\n\nInstructions: Read the response and return the likelihood that the response was AI-generated. Return the likelihood in a JSON object in the format {\"likelihood\": number} where the number is a percentage between 0-100 of how likely it is that the answer was AI-generated. Prioritize returning the JSON object first, and then the justification if necessary."
 
 # Variables support two formats:
 # 1. Simple: ["value1", "value2", ...]
@@ -60,9 +60,9 @@ PROMPT_TEMPLATE = "This is a short response answer for a {{level}} American Hist
 VARIABLES = {
     "level": [
         "10th grade",
-        "college-level",
         "graduate level",
-        "7th grade"
+        "7th grade",
+        "college level"
     ],
     "name": [
         {
@@ -275,25 +275,25 @@ PARAMETER_COLUMNS = ["max_tokens","provider","temperature"]
 MODELS = [
     {
         "config_index": 0,
-        "name": "openai/gpt-4o",
-        "display_name": "openai/gpt-4o",
+        "name": "amazon/nova-micro-v1",
+        "display_name": "amazon/nova-micro-v1",
         "provider": "openrouter",
         "url": "https://openrouter.ai/api/v1/chat/completions",
         "headers": {
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
+            "HTTP-Referer": "https://auditomatic.org",
             "X-Title": "Auditomatic Lite",
             "Authorization": "Bearer {{API_KEY}}"
         },
         "body": {
-            "model": "openai/gpt-4o",
+            "model": "amazon/nova-micro-v1",
             "messages": [
                 {
                     "role": "user",
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -301,7 +301,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -326,7 +326,7 @@ MODELS = [
         "url": "https://openrouter.ai/api/v1/chat/completions",
         "headers": {
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
+            "HTTP-Referer": "https://auditomatic.org",
             "X-Title": "Auditomatic Lite",
             "Authorization": "Bearer {{API_KEY}}"
         },
@@ -338,7 +338,7 @@ MODELS = [
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -346,7 +346,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -365,25 +365,25 @@ MODELS = [
     },
     {
         "config_index": 2,
-        "name": "openai/gpt-oss-120b",
-        "display_name": "openai/gpt-oss-120b",
+        "name": "deepseek/deepseek-chat",
+        "display_name": "deepseek/deepseek-chat",
         "provider": "openrouter",
         "url": "https://openrouter.ai/api/v1/chat/completions",
         "headers": {
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
+            "HTTP-Referer": "https://auditomatic.org",
             "X-Title": "Auditomatic Lite",
             "Authorization": "Bearer {{API_KEY}}"
         },
         "body": {
-            "model": "openai/gpt-oss-120b",
+            "model": "deepseek/deepseek-chat",
             "messages": [
                 {
                     "role": "user",
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -391,7 +391,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -410,13 +410,193 @@ MODELS = [
     },
     {
         "config_index": 3,
+        "name": "google/gemini-3-flash-preview",
+        "display_name": "google/gemini-3-flash-preview",
+        "provider": "openrouter",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "headers": {
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://auditomatic.org",
+            "X-Title": "Auditomatic Lite",
+            "Authorization": "Bearer {{API_KEY}}"
+        },
+        "body": {
+            "model": "google/gemini-3-flash-preview",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "{{PROMPT}}"
+                }
+            ],
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "parameters": {
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "extract_paths": [
+            "choices[0].message.content",
+            "choices[0].text",
+            "message.content"
+        ],
+        "reasoning_paths": [
+            "choices[0].message.reasoning",
+            "choices[0].message.reasoning_details[0].summary"
+        ]
+    },
+    {
+        "config_index": 4,
+        "name": "google/gemma-2-27b-it",
+        "display_name": "google/gemma-2-27b-it",
+        "provider": "openrouter",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "headers": {
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://auditomatic.org",
+            "X-Title": "Auditomatic Lite",
+            "Authorization": "Bearer {{API_KEY}}"
+        },
+        "body": {
+            "model": "google/gemma-2-27b-it",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "{{PROMPT}}"
+                }
+            ],
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "parameters": {
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "extract_paths": [
+            "choices[0].message.content",
+            "choices[0].text",
+            "message.content"
+        ],
+        "reasoning_paths": [
+            "choices[0].message.reasoning",
+            "choices[0].message.reasoning_details[0].summary"
+        ]
+    },
+    {
+        "config_index": 5,
+        "name": "meta-llama/llama-4-maverick",
+        "display_name": "meta-llama/llama-4-maverick",
+        "provider": "openrouter",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "headers": {
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://auditomatic.org",
+            "X-Title": "Auditomatic Lite",
+            "Authorization": "Bearer {{API_KEY}}"
+        },
+        "body": {
+            "model": "meta-llama/llama-4-maverick",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "{{PROMPT}}"
+                }
+            ],
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "parameters": {
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "extract_paths": [
+            "choices[0].message.content",
+            "choices[0].text",
+            "message.content"
+        ],
+        "reasoning_paths": [
+            "choices[0].message.reasoning",
+            "choices[0].message.reasoning_details[0].summary"
+        ]
+    },
+    {
+        "config_index": 6,
+        "name": "openai/gpt-4o",
+        "display_name": "openai/gpt-4o",
+        "provider": "openrouter",
+        "url": "https://openrouter.ai/api/v1/chat/completions",
+        "headers": {
+            "Content-Type": "application/json",
+            "HTTP-Referer": "https://auditomatic.org",
+            "X-Title": "Auditomatic Lite",
+            "Authorization": "Bearer {{API_KEY}}"
+        },
+        "body": {
+            "model": "openai/gpt-4o",
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "{{PROMPT}}"
+                }
+            ],
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "parameters": {
+            "temperature": 0.02,
+            "max_tokens": 2048,
+            "provider": {
+                "allow_fallbacks": False,
+                "require_parameters": True
+            }
+        },
+        "extract_paths": [
+            "choices[0].message.content",
+            "choices[0].text",
+            "message.content"
+        ],
+        "reasoning_paths": [
+            "choices[0].message.reasoning",
+            "choices[0].message.reasoning_details[0].summary"
+        ]
+    },
+    {
+        "config_index": 7,
         "name": "openai/gpt-5-nano",
         "display_name": "openai/gpt-5-nano",
         "provider": "openrouter",
         "url": "https://openrouter.ai/api/v1/chat/completions",
         "headers": {
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
+            "HTTP-Referer": "https://auditomatic.org",
             "X-Title": "Auditomatic Lite",
             "Authorization": "Bearer {{API_KEY}}"
         },
@@ -452,206 +632,26 @@ MODELS = [
         ]
     },
     {
-        "config_index": 4,
-        "name": "qwen/qwen-max",
-        "display_name": "qwen/qwen-max",
-        "provider": "openrouter",
-        "url": "https://openrouter.ai/api/v1/chat/completions",
-        "headers": {
-            "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
-            "X-Title": "Auditomatic Lite",
-            "Authorization": "Bearer {{API_KEY}}"
-        },
-        "body": {
-            "model": "qwen/qwen-max",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "{{PROMPT}}"
-                }
-            ],
-            "temperature": 0,
-            "max_tokens": 2048,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "parameters": {
-            "temperature": 0,
-            "max_tokens": 2048,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "extract_paths": [
-            "choices[0].message.content",
-            "choices[0].text",
-            "message.content"
-        ],
-        "reasoning_paths": [
-            "choices[0].message.reasoning",
-            "choices[0].message.reasoning_details[0].summary"
-        ]
-    },
-    {
-        "config_index": 5,
-        "name": "google/gemini-3-flash-preview",
-        "display_name": "google/gemini-3-flash-preview",
-        "provider": "openrouter",
-        "url": "https://openrouter.ai/api/v1/chat/completions",
-        "headers": {
-            "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
-            "X-Title": "Auditomatic Lite",
-            "Authorization": "Bearer {{API_KEY}}"
-        },
-        "body": {
-            "model": "google/gemini-3-flash-preview",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "{{PROMPT}}"
-                }
-            ],
-            "temperature": 0,
-            "max_tokens": 2048,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "parameters": {
-            "temperature": 0,
-            "max_tokens": 2048,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "extract_paths": [
-            "choices[0].message.content",
-            "choices[0].text",
-            "message.content"
-        ],
-        "reasoning_paths": [
-            "choices[0].message.reasoning",
-            "choices[0].message.reasoning_details[0].summary"
-        ]
-    },
-    {
-        "config_index": 6,
-        "name": "google/gemma-2-27b-it",
-        "display_name": "google/gemma-2-27b-it",
-        "provider": "openrouter",
-        "url": "https://openrouter.ai/api/v1/chat/completions",
-        "headers": {
-            "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
-            "X-Title": "Auditomatic Lite",
-            "Authorization": "Bearer {{API_KEY}}"
-        },
-        "body": {
-            "model": "google/gemma-2-27b-it",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "{{PROMPT}}"
-                }
-            ],
-            "temperature": 0,
-            "max_tokens": 2048,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "parameters": {
-            "temperature": 0,
-            "max_tokens": 2048,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "extract_paths": [
-            "choices[0].message.content",
-            "choices[0].text",
-            "message.content"
-        ],
-        "reasoning_paths": [
-            "choices[0].message.reasoning",
-            "choices[0].message.reasoning_details[0].summary"
-        ]
-    },
-    {
-        "config_index": 7,
-        "name": "x-ai/grok-3-mini",
-        "display_name": "x-ai/grok-3-mini",
-        "provider": "openrouter",
-        "url": "https://openrouter.ai/api/v1/chat/completions",
-        "headers": {
-            "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
-            "X-Title": "Auditomatic Lite",
-            "Authorization": "Bearer {{API_KEY}}"
-        },
-        "body": {
-            "model": "x-ai/grok-3-mini",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "{{PROMPT}}"
-                }
-            ],
-            "temperature": 0,
-            "max_tokens": 1024,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "parameters": {
-            "temperature": 0,
-            "max_tokens": 1024,
-            "provider": {
-                "allow_fallbacks": False,
-                "require_parameters": True
-            }
-        },
-        "extract_paths": [
-            "choices[0].message.content",
-            "choices[0].text",
-            "message.content"
-        ],
-        "reasoning_paths": [
-            "choices[0].message.reasoning",
-            "choices[0].message.reasoning_details[0].summary"
-        ]
-    },
-    {
         "config_index": 8,
-        "name": "amazon/nova-micro-v1",
-        "display_name": "amazon/nova-micro-v1",
+        "name": "openai/gpt-oss-120b",
+        "display_name": "openai/gpt-oss-120b",
         "provider": "openrouter",
         "url": "https://openrouter.ai/api/v1/chat/completions",
         "headers": {
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
+            "HTTP-Referer": "https://auditomatic.org",
             "X-Title": "Auditomatic Lite",
             "Authorization": "Bearer {{API_KEY}}"
         },
         "body": {
-            "model": "amazon/nova-micro-v1",
+            "model": "openai/gpt-oss-120b",
             "messages": [
                 {
                     "role": "user",
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -659,7 +659,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -678,34 +678,34 @@ MODELS = [
     },
     {
         "config_index": 9,
-        "name": "deepseek/deepseek-chat",
-        "display_name": "deepseek/deepseek-chat",
+        "name": "qwen/qwen-max",
+        "display_name": "qwen/qwen-max",
         "provider": "openrouter",
         "url": "https://openrouter.ai/api/v1/chat/completions",
         "headers": {
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
+            "HTTP-Referer": "https://auditomatic.org",
             "X-Title": "Auditomatic Lite",
             "Authorization": "Bearer {{API_KEY}}"
         },
         "body": {
-            "model": "deepseek/deepseek-chat",
+            "model": "qwen/qwen-max",
             "messages": [
                 {
                     "role": "user",
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0,
-            "max_tokens": 1024,
+            "temperature": 0.02,
+            "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
                 "require_parameters": True
             }
         },
         "parameters": {
-            "temperature": 0,
-            "max_tokens": 1024,
+            "temperature": 0.02,
+            "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
                 "require_parameters": True
@@ -723,68 +723,25 @@ MODELS = [
     },
     {
         "config_index": 10,
-        "name": "meta-llama/llama-4-maverick",
-        "display_name": "meta-llama/llama-4-maverick",
+        "name": "x-ai/grok-3-mini",
+        "display_name": "x-ai/grok-3-mini",
         "provider": "openrouter",
         "url": "https://openrouter.ai/api/v1/chat/completions",
         "headers": {
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
+            "HTTP-Referer": "https://auditomatic.org",
             "X-Title": "Auditomatic Lite",
             "Authorization": "Bearer {{API_KEY}}"
         },
         "body": {
-            "model": "meta-llama/llama-4-maverick",
+            "model": "x-ai/grok-3-mini",
             "messages": [
                 {
                     "role": "user",
                     "content": "{{PROMPT}}"
                 }
             ],
-            "temperature": 0.8,
-            "max_tokens": 2000,
-            "provider": {
-                "require_parameters": True
-            }
-        },
-        "parameters": {
-            "temperature": 0.8,
-            "max_tokens": 2000,
-            "provider": {
-                "require_parameters": True
-            }
-        },
-        "extract_paths": [
-            "choices[0].message.content",
-            "choices[0].text",
-            "message.content"
-        ],
-        "reasoning_paths": [
-            "choices[0].message.reasoning",
-            "choices[0].message.reasoning_details[0].summary"
-        ]
-    },
-    {
-        "config_index": 11,
-        "name": "deepseek/deepseek-prover-v2",
-        "display_name": "deepseek/deepseek-prover-v2",
-        "provider": "openrouter",
-        "url": "https://openrouter.ai/api/v1/chat/completions",
-        "headers": {
-            "Content-Type": "application/json",
-            "HTTP-Referer": "https://auditomatic.app",
-            "X-Title": "Auditomatic Lite",
-            "Authorization": "Bearer {{API_KEY}}"
-        },
-        "body": {
-            "model": "deepseek/deepseek-prover-v2",
-            "messages": [
-                {
-                    "role": "user",
-                    "content": "{{PROMPT}}"
-                }
-            ],
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
@@ -792,7 +749,7 @@ MODELS = [
             }
         },
         "parameters": {
-            "temperature": 0,
+            "temperature": 0.02,
             "max_tokens": 2048,
             "provider": {
                 "allow_fallbacks": False,
