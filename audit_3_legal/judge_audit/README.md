@@ -6,6 +6,7 @@ This repository contains the full workflow for Experiemnt III, a controlled pert
 
 ## Contents
 
+```
 judge_audit/
 ├─ analysis.ipynb           # Jupyter Notebook with analysis, visualizations & statistical testing
 ├─ data
@@ -20,6 +21,7 @@ judge_audit/
        ├─ trial_config.json
 ├─ results.csv              # Dataset obtained and cleaned from judge evaluation audit
 ├─ requirements.txt         # Necessary python package dependencies
+```
 
 ---
 
