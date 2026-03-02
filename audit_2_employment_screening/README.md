@@ -27,11 +27,11 @@ Because the raw dataset is included, all statistical results in the paper are fu
 2. Install dependencies:
 ```
 pip install -r requirements.txt
-``
+```
 4. Launch Jupyter Notebook:
-``
+```
    jupyter notebook
-``
+```
 5. Open `analysis.ipynb`
 6. Run all cells from top to bottom
 
