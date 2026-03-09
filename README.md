@@ -17,8 +17,7 @@ Domains can also use additional extraction workflows when needed.
 │  └─ ai_gen_true/
 ├─ audit_2_employment_screening/
 ├─ audit_3_legal/
-│  ├─ judge_audit/
-│  └─ legal_service_audit/
+│  └─ judge_audit/
 ├─ audit_4_mental_health/
 ├─ audit_5_service_eval/
 │  ├─ layoffs/
@@ -40,8 +39,6 @@ Domains can also use additional extraction workflows when needed.
   demographic perturbations.
 - `audit_3_legal/judge_audit/`: Judge-evaluation fairness audit with controlled
   demographic/context variables.
-- `audit_3_legal/legal_service_audit/`: Legal-service triage fairness audit for
-  housing-related scenarios.
 - `audit_4_mental_health/`: Mental-health triage fairness audit on urgency and
   triage-level outputs.
 - `audit_5_service_eval/`: Teacher service evaluation audit with two framings:
