@@ -1,0 +1,210 @@
+# Aggregated requirements for all audit domains in this repository.
+#
+# Sources consolidated here:
+# - audit_1_ai_gen_detect/ai_gen_false/requirements.txt
+# - audit_1_ai_gen_detect/ai_gen_true/requirements.txt
+# - audit_2_employment_screening/requirements.txt
+# - audit_3_legal/judge_audit/requirements.txt
+# - audit_3_legal/judge_audit/model_data/*/requirements.txt
+# - audit_4_mental_health/requirements.txt
+# - audit_5_service_eval/layoffs/requirements.txt
+# - audit_5_service_eval/reward/requirements.txt
+#
+# Strategy:
+# - Keep the exact pins from the legal audit analysis environment, since that is
+#   the strictest published dependency set in the repo.
+# - Add experiment-runner packages that appear in the AI-generated-detection and
+#   teacher-service domains but are absent from the legal environment export.
+# - Keep Windows-only packages behind platform markers so the file remains
+#   installable on non-Windows systems.
+
+# Additional experiment runner dependencies not present in the legal export
+aiometer>=0.5.0
+aiosqlite>=0.19.0
+jmespath>=1.0.0
+openpyxl>=3.1.0
+py-mini-racer>=0.6.0
+pyarrow>=12.0.0
+tenacity>=8.2.0
+
+# Normalized from audit_3_legal/judge_audit/requirements.txt (original file was UTF-16)
+aiohappyeyeballs==2.6.1
+aiohttp==3.12.15
+aiosignal==1.4.0
+anyio==4.9.0
+argon2-cffi==23.1.0
+argon2-cffi-bindings==21.2.0
+arrow==1.3.0
+asttokens==3.0.0
+async-lru==2.0.5
+attrs==25.3.0
+autograd==1.8.0
+autograd-gamma==0.5.0
+babel==2.17.0
+beautifulsoup4==4.13.4
+bleach==6.2.0
+cachetools==6.2.1
+certifi==2025.4.26
+cffi==1.17.1
+cftime==1.6.5
+charset-normalizer==3.4.2
+colorama==0.4.6
+comm==0.2.2
+contourpy==1.3.2
+crc32c==2.8
+cycler==0.12.1
+debugpy==1.8.14
+decorator==5.2.1
+defusedxml==0.7.1
+donfig==0.8.1.post1
+executing==2.2.0
+fastjsonschema==2.21.1
+filelock==3.19.1
+fonttools==4.58.1
+formulaic==1.2.1
+fqdn==1.5.1
+frozenlist==1.7.0
+fsspec==2025.10.0
+gcsfs==2025.10.0
+google-api-core==2.28.1
+google-auth==2.41.1
+google-auth-oauthlib==1.2.3
+google-cloud-core==2.5.0
+google-cloud-storage==3.4.1
+google-crc32c==1.7.1
+google-resumable-media==2.7.2
+googleapis-common-protos==1.71.0
+h11==0.16.0
+httpcore==1.0.9
+httpx==0.28.1
+idna==3.10
+interface-meta==1.3.0
+ipykernel==6.29.5
+ipython==9.3.0
+ipython_pygments_lexers==1.1.1
+ipywidgets==8.1.7
+ISLP==0.4.0
+isoduration==20.11.0
+jedi==0.19.2
+Jinja2==3.1.6
+joblib==1.5.1
+json5==0.12.0
+jsonpointer==3.0.0
+jsonschema==4.24.0
+jsonschema-specifications==2025.4.1
+jupyter==1.1.1
+jupyter-console==6.6.3
+jupyter-events==0.12.0
+jupyter-lsp==2.2.5
+jupyter_client==8.6.3
+jupyter_core==5.8.1
+jupyter_server==2.16.0
+jupyter_server_terminals==0.5.3
+jupyterlab==4.4.3
+jupyterlab_pygments==0.3.0
+jupyterlab_server==2.27.3
+jupyterlab_widgets==3.0.15
+kiwisolver==1.4.8
+lab==8.4
+lets-plot==4.8.2
+lifelines==0.30.0
+lightning-utilities==0.15.2
+lxml==6.0.2
+MarkupSafe==3.0.2
+matplotlib==3.10.3
+matplotlib-inline==0.1.7
+mistune==3.1.3
+mizani==0.14.3
+mpmath==1.3.0
+multidict==6.6.4
+narwhals==2.6.0
+nba_api==1.10.0
+nbclient==0.10.2
+nbconvert==7.16.6
+nbformat==5.10.4
+nc-time-axis==1.4.1
+nest-asyncio==1.6.0
+networkx==3.5
+notebook==7.4.3
+notebook_shim==0.2.4
+numcodecs==0.16.3
+numpy==2.2.6
+oauthlib==3.3.1
+overrides==7.7.0
+packaging==25.0
+palettable==3.3.3
+pandas==2.3.1
+pandocfilters==1.5.1
+parso==0.8.4
+patsy==1.0.1
+pillow==11.2.1
+platformdirs==4.3.8
+plotly==6.5.0
+plotnine==0.15.2
+progressbar2==4.5.0
+prometheus_client==0.22.0
+prompt_toolkit==3.0.51
+propcache==0.3.2
+proto-plus==1.26.1
+protobuf==6.33.0
+psutil==7.0.0
+pure_eval==0.2.3
+pyasn1==0.6.1
+pyasn1_modules==0.4.2
+pycparser==2.22
+pygam==0.10.1
+Pygments==2.19.1
+pyparsing==3.2.3
+pypng==0.20220715.0
+python-dateutil==2.9.0.post0
+python-json-logger==3.3.0
+python-utils==3.9.1
+pytorch-lightning==2.5.5
+pytz==2025.2
+pywin32==310; platform_system == "Windows"
+pywinpty==2.0.15; platform_system == "Windows"
+PyYAML==6.0.2
+pyzmq==26.4.0
+referencing==0.36.2
+requests==2.32.3
+requests-oauthlib==2.0.0
+rfc3339-validator==0.1.4
+rfc3986-validator==0.1.1
+rpds-py==0.25.1
+rsa==4.9.1
+scikit-learn==1.7.0
+scipy==1.15.3
+seaborn==0.13.2
+Send2Trash==1.8.3
+setuptools==80.9.0
+simplejson==3.20.1
+six==1.17.0
+sniffio==1.3.1
+soupsieve==2.7
+stack-data==0.6.3
+statsmodels==0.14.5
+sympy==1.14.0
+terminado==0.18.1
+threadpoolctl==3.6.0
+tinycss2==1.4.0
+torch==2.8.0
+torchmetrics==1.8.2
+tornado==6.5.1
+tqdm==4.67.1
+traitlets==5.14.3
+txt2tags==3.9
+types-python-dateutil==2.9.0.20250516
+typing_extensions==4.13.2
+tzdata==2025.2
+uri-template==1.3.0
+urllib3==2.4.0
+wcwidth==0.2.13
+webcolors==24.11.1
+webencodings==0.5.1
+websocket-client==1.8.0
+widgetsnbextension==4.0.14
+wrapt==2.0.0rc2
+xarray==2025.10.1
+xgboost==3.1.2
+yarl==1.20.1
+zarr==3.1.3
