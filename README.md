@@ -123,6 +123,8 @@ audit_1_ai_gen_detect/
 
 <details>
 <summary><code>audit_1_ai_gen_detect/README.md</code></summary>
+
+<pre>
 # Education Audits: AI Generated Detection Likelihood Scoring (True & False)
 
 This folder contains the AI Generated Detection Likelihood audits, two controlled perturbation audits where a pre-GPT era piece of writing, and a GPT-written blurb are scrutinized by the models and assigned a "likelihood" score that indicates how likely it is that the pieces were AI generated. 
@@ -131,10 +133,14 @@ The short answer response is identical for every call in each audit, and the onl
 
 Each folder has detailed instructions for that particular experiment.
 
+</pre>
+
 </details>
 
 <details>
 <summary><code>audit_1_ai_gen_detect/ai_gen_false/README.md</code></summary>
+
+<pre>
 # Experiment: AI Generated Detection Likelihood Scoring (False: The writing is NOT AI-generated)
 
 This repository contains the full workflow for Experiment I, a controlled perturbation audit where a pre-GPT era piece of writing is scrutinized by the models and assigned a "likelihood" score that indicates how likely it is that the piece was AI generated. 
@@ -334,10 +340,14 @@ Network error GPT-4: TimeoutException
 ```
 **Fix:** Increase `--timeout` or check your network connection
 
+</pre>
+
 </details>
 
 <details>
 <summary><code>audit_1_ai_gen_detect/ai_gen_true/README.md</code></summary>
+
+<pre>
 # Experiment: AI Generated Detection Likelihood Scoring (True: The writing is AI-generated)
 
 This repository contains the full workflow for a controlled perturbation audit where an AI-generated piece of writing is scrutinized by the models and assigned a "likelihood" score that indicates how likely it is that the piece was AI generated. 
@@ -537,6 +547,8 @@ Network error GPT-4: TimeoutException
 ```
 **Fix:** Increase `--timeout` or check your network connection
 
+</pre>
+
 </details>
 
 ## `audit_2_employment_screening`
@@ -566,6 +578,8 @@ audit_2_employment_screening/
 
 <details>
 <summary><code>audit_2_employment_screening/README.md</code></summary>
+
+<pre>
 ## Employment Screening Audit
 This folder contains documents relating to the data analysis and statistical testing of the employment screening audit. Hiring teams increasingly use AI tools for resume screening and candidate ranking. While these tools promise efficiency, stakeholders (job seekers and recruiters) worry that demographic cues - such as perceived race/ethnicity, gender, or disability status - could influence screening decisions even when qualifications are identical. This page documents our employment screening-domain analysis and highlights when demographic effects appear negligible in aggregate yet substantial at the individual-model level.
 
@@ -604,6 +618,8 @@ jupyter notebook
 6. Run all cells from top to bottom
 
 Running all cells will regenerate all statistical tests, tables, and visualizations reported in this project.
+
+</pre>
 
 </details>
 
@@ -652,6 +668,8 @@ audit_3_legal/
 
 <details>
 <summary><code>audit_3_legal/README.md</code></summary>
+
+<pre>
 # Legal Audits: Judge Hearing Evaluation 
 
 ---
@@ -665,10 +683,14 @@ The LLM is provided an identical prompt for every call, and the only difference 
 
 ---
 
+</pre>
+
 </details>
 
 <details>
 <summary><code>audit_3_legal/judge_audit/README.md</code></summary>
+
+<pre>
 # Experiment: Judge Hearing Discretion Evaluation  
 
 This repository contains the full workflow for Experiemnt III, a controlled perturbation audit examing whether large language models (LLMs) assign different ordinal scores to the same judge when only the judge's name (a proxy for gender and ethnicity), age, and immigration status is changed.
@@ -868,6 +890,8 @@ Network error GPT-4: TimeoutException
 ```
 **Fix:** Increase `--timeout` or check your network connection
 
+</pre>
+
 </details>
 
 ## `audit_4_mental_health`
@@ -897,6 +921,8 @@ audit_4_mental_health/
 
 <details>
 <summary><code>audit_4_mental_health/README.md</code></summary>
+
+<pre>
 ## Mental Health Triage Audit
 This folder contains documents relating to the data analysis and statistical testing of the mental health audit. AI is largely being used to remove the administrative burden from mental health triaging. Through stakeholders interviews, it is clear there is concern regarding how a biased system can directly shape how individuals are advised to respond to psychological distress and their access to care. For individuals from marginalized communities who may already experience barriers to care and historical mistrust of medical systems, differential AI assessments risk compounding existing inequities. This page documents our mental health audit analysis.
 
@@ -935,6 +961,8 @@ jupyter notebook
 6. Run all cells from top to bottom
 
 Running all cells will regenerate all statistical tests, tables, and visualizations reported in this project.
+
+</pre>
 
 </details>
 
@@ -978,6 +1006,8 @@ audit_5_service_eval/
 
 <details>
 <summary><code>audit_5_service_eval/README.md</code></summary>
+
+<pre>
 # Education Audits: How AI Evaluates Teacher Service (Positive & Negative Framings)
 
 This folder contains two different contexts for controlled perturbation audits where we have different LLMs act as administrative assistant tools for a school district. In these audits, we ask the AI tool to evaluate teachers based on their duties and activities with the purpose of either laying off those with lower scores, or rewarding those with higher scores. 
@@ -986,6 +1016,8 @@ The quasi-resumes are identical for every call, with the only difference being t
 
 Each folder has detailed instructions for that particular experiment.
 
+</pre>
+
 
 </details>
 
@@ -993,6 +1025,7 @@ Each folder has detailed instructions for that particular experiment.
 <summary><code>audit_5_service_eval/layoffs/README.md</code></summary>
 
 
+<pre>
 # Experiment: How AI Evaluates Teacher Service (Negative)
 
 Trial Name: Teacher Service Evaluations (layoffs)
@@ -1196,12 +1229,15 @@ Network error GPT-4: TimeoutException
 ```
 **Fix:** Increase `--timeout` or check your network connection
 
+</pre>
+
 </details>
 
 <details>
 <summary><code>audit_5_service_eval/reward/README.md</code></summary>
 
 
+<pre>
 # Experiment: How AI Evaluates Teacher Service (Positive)
 
 Trial Name: Teacher Service Evaluations (reward)
@@ -1404,5 +1440,7 @@ Retry 3 for GPT-4 after HTTPStatusError: 429 Rate Limit
 Network error GPT-4: TimeoutException
 ```
 **Fix:** Increase `--timeout` or check your network connection
+
+</pre>
 
 </details>
