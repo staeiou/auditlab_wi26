@@ -13,9 +13,6 @@ includes:
 - aggregated setup guidance
 - verbatim copies of the domain README files
 
-`data_extraction/` is intentionally excluded from this document and from the
-repository contents.
-
 ## Repository Overview
 
 ### Domains
