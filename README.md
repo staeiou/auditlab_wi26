@@ -26,23 +26,6 @@ Run the lightweight repository smoke check:
 
 ```bash
 python3 scripts/validate_repo.py
-#!/bin/bash 
-
-sum_n() {
-    local n=$1
-    local i
-    local s=0
-    for (( i=1;i<=n;i++ )); do 
-        (( s+=i ))
-    done
-    echo "sum is $s"
-}
-
-sum_n 1
-sum_n 10
-sum_n 100
-
-
 ```
 
 If you want to rerun any experiment-based audit, set the OpenRouter key first:
@@ -257,3 +240,21 @@ jupyter notebook analysis.ipynb
 - Not every audit domain includes the original data-generation script. Where that script is unavailable, the repository includes the dataset needed to reproduce the analysis.
 - Some large raw outputs are intentionally stored outside the repo and linked from the corresponding subfolder README files.
 - This top-level README is intentionally short and operational. More detailed experiment notes remain in each domain-specific README.
+
+## Contribution Attribution Note
+
+Some historical commits in this repository were created before all local Git author settings were aligned with GitHub-linked email addresses. As a result, GitHub's web contributor graph may undercount some work even though the commits are present in the repository history.
+
+The table below summarizes repository commit counts across the five teammates after unifying split author identities with `.mailmap`.
+
+| Teammate | Combined Commits | How Those Commits Are Split In Git History |
+| --- | ---: | --- |
+| Huize Mao | 21 | 13 main-branch commits under a local machine email, 6 under a GitHub noreply address, 1 under a personal email, plus 1 additional local-email commit on a non-default branch |
+| Derrick Dollesin | 34 | 19 under a personal email and 15 under a GitHub noreply address |
+| Rosey A Gutierrez | 19 | 15 under a shortened display name and 4 under a full-name variant, both using the same GitHub noreply address |
+| Bhagya Ram | 17 | 11 under a GitHub noreply address and 6 under a personal email |
+| Stuart Geiger | 7 | 7 under a single author identity |
+
+To make repository-local attribution clearer, this repo includes a `.mailmap` file so local Git reporting can unify those identities when the repository history is reviewed directly.
+
+This note is included for transparency about attribution in the repository history. It does not modify or rewrite any past commits.
