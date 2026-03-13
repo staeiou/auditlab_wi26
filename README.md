@@ -36,6 +36,22 @@ export OPENROUTER_API_KEY="sk-or-..."
 
 Then either open the notebook for an analysis-only domain or run `experiment.py` inside the relevant experiment folder.
 
+## Recommended Review Path
+
+If you are reviewing this repository for grading, the fastest path is:
+
+1. Run `python3 scripts/validate_repo.py` from the repository root.
+2. Review the analysis-only domains with included datasets:
+   - `audit_2_employment_screening/analysis.ipynb`
+   - `audit_3_legal/judge_audit/analysis.ipynb`
+   - `audit_4_mental_health/analysis.ipynb`
+3. Review the included HTML analysis exports for the experiment-based domains:
+   - `audit_1_ai_gen_detect/ai_gen_false/detec_false_analysis.html`
+   - `audit_1_ai_gen_detect/ai_gen_true/detec_true_analysis.html`
+   - `audit_5_service_eval/layoffs/eval_neg_analysis.html`
+   - `audit_5_service_eval/reward/eval_pos_analysis.html`
+4. Only rerun API-based experiments if you want fresh outputs and have an `OPENROUTER_API_KEY`.
+
 ## Reproducibility Guide
 
 ### 1. AI-generated Detection Audit
@@ -245,7 +261,7 @@ jupyter notebook analysis.ipynb
 
 Some historical commits in this repository were created before all local Git author settings were aligned with GitHub-linked email addresses. As a result, GitHub's web contributor graph may undercount some work even though the commits are present in the repository history.
 
-The table below summarizes repository commit counts across the five teammates after unifying split author identities with `.mailmap`.
+The table below summarizes repository commit counts across the five teammates after unifying split author identities with `.mailmap`. These counts reflect the repository's local Git history rather than GitHub's web contributor graph.
 
 | Teammate | Combined Commits | How Those Commits Are Split In Git History |
 | --- | ---: | --- |
