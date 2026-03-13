@@ -1,4 +1,3 @@
-**/**/.ipynb_checkpoint*
 k8s_config
 batch_triage/batch
 AGENTS.md
@@ -9,6 +8,22 @@ misc
 
 # Ignore python cache files
 **/__pycache__/
+**/*.pyc
+**/*.pyo
+**/.ipynb_checkpoints/
+
+# Ignore local virtual environments
+.venv/
+venv/
 
 # Ignore log files
 **/*.log
+
+# Ignore generated experiment outputs without hiding tracked datasets like results.csv
+**/results_[0-9]*.db
+**/results_[0-9]*.csv
+**/results_[0-9]*.tsv
+**/results_[0-9]*.json
+**/results_[0-9]*.jsonl
+**/results_[0-9]*.xlsx
+**/results_[0-9]*.parquet
